@@ -2,16 +2,18 @@
 import {spawn,spawnSync} from 'node:child_process';
 import {mkdir,access,writeFile,chmod,unlink} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {dirname,join} from 'node:path';
+import {dirname,join,resolve} from 'node:path';
+export function publicTunnelURL(text){return text.match(/https:\/\/(?!api\.)[a-z0-9]+(?:-[a-z0-9]+)+\.trycloudflare\.com(?![.a-z0-9-])/i)?.[0]??null;}
 const root=dirname(fileURLToPath(import.meta.url));
 process.chdir(root);
 let server,tunnel,closing=false,linkSaved=false;
 const linkFile=join(root,'JOIN_LINK.txt');
-function stop(code=0){if(closing)return;closing=true;server?.kill();tunnel?.kill();process.exitCode=code;}
+function stop(code=0){if(closing)return;closing=true;server?.kill();tunnel?.kill();unlink(linkFile).catch(()=>{});process.exitCode=code;}
 process.on('SIGINT',()=>stop());process.on('SIGTERM',()=>stop());
 process.on('exit',()=>{server?.kill();tunnel?.kill();});
 async function main(){
  if(!['win32','linux'].includes(process.platform)||!['x64','arm64'].includes(process.arch))throw Error('This launcher supports Windows/Linux x64 or ARM64.');
+ if(process.platform==='win32'&&process.arch!=='x64')throw Error('Windows launcher requires x64 Windows.');
  if(Number(process.versions.node.split('.')[0])<20)throw Error('Install Node.js 20 or newer first.');
  try{await unlink(linkFile);}catch{}
  console.log('HK18 FREE ONLINE - keep this window and computer running.');
@@ -45,11 +47,11 @@ async function main(){
  let tail='';
  const output=data=>{
   const text=data.toString();process.stdout.write(text);tail=(tail+text).slice(-10000);
-  const match=tail.match(/https:\/\/[a-z0-9-]+\.trycloudflare\.com\b/i);
-  if(match&&!linkSaved){linkSaved=true;const url=match[0];writeFile(linkFile,url+'\r\n\r\nOpen this URL on phone, create a room, share URL and room code.\r\nKeep the computer and this window running.\r\n').then(()=>console.log('\nSHARE THIS URL: '+url+'\nAlso saved in JOIN_LINK.txt\nCreate a room; friends click Join and enter its room code.\n')).catch(e=>console.error('Could not save URL:',e.message));}
+  const url=publicTunnelURL(tail);
+  if(url&&!linkSaved&&!closing){linkSaved=true;writeFile(linkFile,url+'\r\n\r\nOpen this URL on phone, create a room, share URL and room code.\r\nKeep the computer and this window running.\r\n').then(()=>console.log('\nSHARE THIS URL: '+url+'\nAlso saved in JOIN_LINK.txt\nCreate a room; friends click Join and enter its room code.\n')).catch(e=>console.error('Could not save URL:',e.message));}
  };
  tunnel.stdout.on('data',output);tunnel.stderr.on('data',output);
  tunnel.on('error',e=>{console.error('Tunnel failed:',e.message);stop(1);});
  tunnel.on('exit',code=>{if(!closing){console.error('Public link has stopped. Restart to get a new URL.');stop(code||1);}});
 }
-main().catch(e=>{console.error('\nERROR: '+e.message);stop(1);});
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main().catch(e=>{console.error('\nERROR: '+e.message);stop(1);});
