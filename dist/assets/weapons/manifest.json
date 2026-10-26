@@ -1,0 +1,58 @@
+[
+  {
+    "kind": "uzi",
+    "meshes": 1,
+    "primitives": 3,
+    "triangles": 96,
+    "groups": 1,
+    "materials": 3
+  },
+  {
+    "kind": "grenade",
+    "meshes": 1,
+    "primitives": 3,
+    "triangles": 292,
+    "groups": 1,
+    "materials": 3
+  },
+  {
+    "kind": "bazooka",
+    "meshes": 1,
+    "primitives": 4,
+    "triangles": 168,
+    "groups": 1,
+    "materials": 4
+  },
+  {
+    "kind": "tank",
+    "meshes": 1,
+    "primitives": 3,
+    "triangles": 132,
+    "groups": 1,
+    "materials": 3
+  },
+  {
+    "kind": "mech",
+    "meshes": 1,
+    "primitives": 4,
+    "triangles": 900,
+    "groups": 1,
+    "materials": 4
+  },
+  {
+    "kind": "helicopter",
+    "meshes": 1,
+    "primitives": 4,
+    "triangles": 624,
+    "groups": 1,
+    "materials": 4
+  },
+  {
+    "kind": "mega",
+    "meshes": 1,
+    "primitives": 3,
+    "triangles": 84,
+    "groups": 1,
+    "materials": 3
+  }
+]

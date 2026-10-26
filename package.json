@@ -1,0 +1,13 @@
+{
+  "name": "tsuen-wan-supply-battle",
+  "private": true,
+  "type": "module",
+  "version": "0.7.0",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

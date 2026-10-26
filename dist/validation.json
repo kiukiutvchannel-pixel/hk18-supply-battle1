@@ -1,0 +1,909 @@
+{
+  "version": "0.7.0",
+  "rule_tests": 33,
+  "match_simulations": 4,
+  "model_parse": "passed using actual Three.js GLTFLoader r184",
+  "map_mesh_groups": 6,
+  "map_draw_primitives": 53,
+  "full_scene_triangles": 23306,
+  "compressed_scene_bytes": 333068,
+  "source": "Tsuen Wan landmarks reused within entirely rebuilt cardinal arena",
+  "browser_qa": {
+    "compatibility_mode": "PASSED in Chrome browser: launch, equipment upgrade, teammate recruitment, movement using on-screen joystick drag, pickup, delivery (2 to 3 crates), firing, pause/resume, restart, protection countdown",
+    "full_webgl_3d": "UNVERIFIED: cloud browser reports GL_VENDOR/GL_RENDERER Disabled",
+    "compatibility_renderer": "2.5D actors over an image rendered from the actual 3D scene, explicitly labeled",
+    "animal_v02": "PASSED in Chrome compatibility mode: updated species silhouettes visible, character 240 HP, four bases 1800 HP, equipment Lv2 upgrade, command toggle, firing; screenshot saved",
+    "cardinal_v03": "PASSED compatibility renderer: launch, overview/follow toggle, all four bases visible, central crates visible, command toggle. Actual screenshot saved.",
+    "v04": "PASSED in Chrome compatibility mode: start, open initial pad to spawn Uzi, helper equips it, switch to armed helper, HUD shows Uzi 100 then 99 rounds after firing; jump button interaction; six recipe buttons fit within panel; final screenshot saved.",
+    "terrain_v05": "PASSED in compatibility mode: launch, full map toggle, elevated central island and four bridges visible, NPCs observed on bridge and centre, sea-level 1.5m HUD and terrain minimap, screenshot saved",
+    "single_starter_v051": "Passed Chrome compatibility start UI: team 1/4, switch disabled, single-player build hint",
+    "v06": "Passed Chrome compatibility mode: 18 district selector; Islands and Yau Tsim Mong loaded and played; overview, one unit per team, timed special drops; observed both messages Giant crate opened helicopter and Giant crate opened mech, and flying vehicle sprite. Human-piloted flight/landing in browser remains unverified; core tests verify those actions."
+  },
+  "mobile_touch": "UI pointer interactions checked in desktop Chrome; real iPhone multi-touch and layout remain UNVERIFIED",
+  "hardware_fps": "Full WebGL and physical mobile FPS UNVERIFIED",
+  "deployment": "See hosted URL, confirmed separately after upload",
+  "balance": {
+    "unit_hp": 240,
+    "tank_hp": 600,
+    "base_hp": 1800,
+    "unit_hit_grace_seconds": 0.28,
+    "base_small_arms_damage_factor": 0.45,
+    "base_shell_damage_factor": 0.85,
+    "base_repair": "removed",
+    "unit_healing": "health pickups from opened loose crates; no passive regeneration",
+    "base_loss": "pad disabled, survivors continue; all team members dead means elimination",
+    "cargo": "holding a crate prevents shooting; attack throws crate"
+  },
+  "animals": {
+    "species": [
+      "rabbit",
+      "fox",
+      "cat",
+      "bear"
+    ],
+    "format": "closed primitive mesh prototypes; separate GLB exports; vertex normals and PBR material colours; rigid limb walk animation in game; no skin/skeleton or texture maps",
+    "verification": "geometry checks and software four-angle mesh previews passed; full WebGL appearance UNVERIFIED"
+  },
+  "simulations": [
+    {
+      "seed": 3,
+      "seconds": 124,
+      "winner": 1,
+      "helperCrates": 0,
+      "builds": 0
+    },
+    {
+      "seed": 18,
+      "seconds": 179,
+      "winner": 3,
+      "helperCrates": 0,
+      "builds": 0
+    },
+    {
+      "seed": 97,
+      "seconds": 241,
+      "winner": 3,
+      "helperCrates": 0,
+      "builds": 0
+    },
+    {
+      "seed": 512,
+      "seconds": 135,
+      "winner": 1,
+      "helperCrates": 0,
+      "builds": 0
+    }
+  ],
+  "layout": {
+    "world_bounds": [
+      -70,
+      70
+    ],
+    "bases": {
+      "south_blue_rabbit": [
+        0,
+        -54
+      ],
+      "east_red_fox": [
+        54,
+        0
+      ],
+      "north_yellow_cat": [
+        0,
+        54
+      ],
+      "west_purple_bear": [
+        -54,
+        0
+      ]
+    },
+    "central_supply": {
+      "center": [
+        0,
+        0
+      ],
+      "radius": 11.5,
+      "initial_ground_crates": 12,
+      "all_airdrops_here": true
+    },
+    "routes": "four straight cardinal roads plus outer loop; every base is 54 units from centre",
+    "geometry": "new ground, roads, park corners, cover placement and four rebuilt base structures; four existing landmarks relocated and rescaled"
+  },
+  "core_gameplay": {
+    "helpers": "default autonomous collect, deposit into planned slot, open pad, equip weapon; separate crate reservations",
+    "formation_slots": {
+      "light": [
+        0
+      ],
+      "grenade": [
+        0,
+        1
+      ],
+      "buddy": [
+        0,
+        4
+      ],
+      "heavy": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "elite": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "tank": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "weapons": [
+      "uzi",
+      "grenade",
+      "bazooka",
+      "tank"
+    ],
+    "generated_items": "ground pickups with finite ammunition, death drops, super crate enhancements",
+    "squad": "Exactly 1 starter per team, maximum 4 via pad construction; manual switch/death handover; no free respawn",
+    "other_actions": [
+      "enter/exit tank",
+      "break loose crates into health/ammo",
+      "steal single pad crate",
+      "jump",
+      "throw held crate instead of firing"
+    ]
+  },
+  "helper_end_to_end": {
+    "method": "55 second simulation with one extra friendly helper explicitly added as fixture and damage disabled; separate single-starter test verifies enemy expansion",
+    "team_deliveries": 6,
+    "builds": 3,
+    "squad": 3,
+    "equipped_helpers": 2,
+    "result": "passed",
+    "latest_result": {
+      "delivered": 10,
+      "builds": 7,
+      "squad": 3,
+      "weapons": [
+        "fist",
+        "uzi",
+        "uzi"
+      ]
+    }
+  },
+  "weapon_assets": {
+    "glb": [
+      "uzi",
+      "grenade",
+      "bazooka",
+      "tank",
+      "mech",
+      "helicopter",
+      "mega"
+    ],
+    "geometry_checks": "passed, finite vertices/normals and actual GLTFLoader parsing",
+    "preview": "four views of actual exported geometry",
+    "skeleton": false
+  },
+  "not_implemented": [
+    "original campaign and remaining original classes/vehicles",
+    "online multiplayer",
+    "full skeletal character animation",
+    "original exact numeric balance",
+    "multi-crate vehicle transport"
+  ],
+  "terrain": {
+    "geometry": "actual triangulated height field, closed outer walls and underside",
+    "central_plateau_m": 6,
+    "base_lowlands_m": 1.5,
+    "landmark_highlands_m": 8,
+    "corner_hills_m": 10.5,
+    "riverbed_m": -3,
+    "river": "ring from radius 23 to 31; impassable except four cardinal bridges",
+    "height_source": "terrain.js is shared by exported geometry, actor elevation, navigation, item placement and projectiles",
+    "projection": "lower camera angle and 2400x1872 compatibility scene render",
+    "checks": [
+      "height range",
+      "water blocking and bridge access",
+      "all bases navigate to centre",
+      "bridge walking tracks terrain height",
+      "low shots occluded by hills",
+      "cannot pick crates through vertical gap"
+    ]
+  },
+  "initial_units_per_team": 1,
+  "map_checks": 18,
+  "special_vehicle_checks": 6,
+  "total_rule_map_vehicle_checks": 57,
+  "map_count": 18,
+  "terrain_profiles": 18,
+  "maps": [
+    {
+      "id": "01",
+      "name": "中西區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 6,
+      "landmark": 8,
+      "corner": 10,
+      "inner": 22,
+      "outer": 30,
+      "landmarks": [
+        {
+          "label": "國金二期風格塔樓",
+          "file": "assets/LANDMARK_01_Central_Western_IFC_Tower.glb"
+        },
+        {
+          "label": "中銀大廈風格塔樓",
+          "file": "assets/LANDMARK_01_Central_Western_Bank_Of_China.glb"
+        },
+        {
+          "label": "終審法院風格建築",
+          "file": "assets/LANDMARK_01_Central_Western_Court_Of_Final_Appeal.glb"
+        },
+        {
+          "label": "元創方風格建築",
+          "file": "assets/LANDMARK_01_Central_Western_PMQ.glb"
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "name": "灣仔區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 7,
+      "landmark": 9,
+      "corner": 11,
+      "inner": 23,
+      "outer": 31,
+      "landmarks": [
+        {
+          "label": "中環廣場風格塔樓",
+          "file": "assets/LANDMARK_02_Wan_Chai_Central_Plaza.glb"
+        },
+        {
+          "label": "會展風格展館",
+          "file": "assets/LANDMARK_02_Wan_Chai_HKCEC.glb"
+        },
+        {
+          "label": "虎豹別墅風格建築",
+          "file": "assets/LANDMARK_02_Wan_Chai_Haw_Par_Mansion.glb"
+        },
+        {
+          "label": "藍屋風格唐樓",
+          "file": "assets/LANDMARK_02_Wan_Chai_Blue_House.glb"
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "name": "東區",
+      "biome": "river",
+      "theme": "環河高台",
+      "centre": 8,
+      "landmark": 7,
+      "corner": 12,
+      "inner": 24,
+      "outer": 32,
+      "landmarks": [
+        {
+          "label": "港島東中心風格塔樓",
+          "file": "assets/LANDMARK_03_Eastern_One_Island_East.glb"
+        },
+        {
+          "label": "鰂魚涌密集住宅風格組件",
+          "file": "assets/LANDMARK_03_Eastern_Montane_Mansion.glb"
+        },
+        {
+          "label": "太古城中心風格商場",
+          "file": "assets/LANDMARK_03_Eastern_Cityplaza.glb"
+        },
+        {
+          "label": "油街實現風格紅磚屋",
+          "file": "assets/LANDMARK_03_Eastern_Oi_House.glb"
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "name": "南區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 5,
+      "landmark": 8,
+      "corner": 13,
+      "inner": 21,
+      "outer": 29,
+      "landmarks": [
+        {
+          "label": "美利樓風格建築",
+          "file": "assets/LANDMARK_04_Southern_Murray_House.glb"
+        },
+        {
+          "label": "海洋公園纜車站風格組件",
+          "file": "assets/LANDMARK_04_Southern_Ocean_Cablecar.glb"
+        },
+        {
+          "label": "赤柱市集風格商舖",
+          "file": "assets/LANDMARK_04_Southern_Stanley_Market.glb"
+        },
+        {
+          "label": "香港仔舢舨風格船艇",
+          "file": "assets/LANDMARK_04_Southern_Aberdeen_Sampan.glb"
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "name": "油尖旺區",
+      "biome": "canyon",
+      "theme": "岩谷斜橋",
+      "centre": 6,
+      "landmark": 9,
+      "corner": 9,
+      "inner": 22,
+      "outer": 30,
+      "landmarks": [
+        {
+          "label": "環球貿易廣場風格塔樓",
+          "file": "assets/LANDMARK_05_Yau_Tsim_Mong_ICC.glb"
+        },
+        {
+          "label": "文化中心風格建築",
+          "file": "assets/LANDMARK_05_Yau_Tsim_Mong_Cultural_Centre.glb"
+        },
+        {
+          "label": "尖沙咀鐘樓風格建築",
+          "file": "assets/LANDMARK_05_Yau_Tsim_Mong_Clock_Tower.glb"
+        },
+        {
+          "label": "太空館風格半球建築",
+          "file": "assets/LANDMARK_05_Yau_Tsim_Mong_Space_Museum.glb"
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "name": "深水埗區",
+      "biome": "canyon",
+      "theme": "岩谷斜橋",
+      "centre": 7,
+      "landmark": 7,
+      "corner": 10,
+      "inner": 23,
+      "outer": 31,
+      "landmarks": [
+        {
+          "label": "美荷樓風格屋邨",
+          "file": "assets/LANDMARK_06_Sham_Shui_Po_Mei_Ho_House.glb"
+        },
+        {
+          "label": "西九龍中心風格商場",
+          "file": "assets/LANDMARK_06_Sham_Shui_Po_Dragon_Centre.glb"
+        },
+        {
+          "label": "賽馬會創意藝術中心風格工廈",
+          "file": "assets/LANDMARK_06_Sham_Shui_Po_JCCAC.glb"
+        },
+        {
+          "label": "饒宗頤文化館風格建築",
+          "file": "assets/LANDMARK_06_Sham_Shui_Po_Jao_Tsung_I_Academy.glb"
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "name": "九龍城區",
+      "biome": "highland",
+      "theme": "山林高地",
+      "centre": 8,
+      "landmark": 8,
+      "corner": 11,
+      "inner": 24,
+      "outer": 32,
+      "landmarks": [
+        {
+          "label": "啟德主場館風格建築",
+          "file": "assets/LANDMARK_07_Kowloon_City_Kai_Tak_Stadium.glb"
+        },
+        {
+          "label": "啟德郵輪碼頭風格建築",
+          "file": "assets/LANDMARK_07_Kowloon_City_Kai_Tak_Cruise_Terminal.glb"
+        },
+        {
+          "label": "牛棚藝術村風格紅磚屋",
+          "file": "assets/LANDMARK_07_Kowloon_City_Cattle_Depot.glb"
+        },
+        {
+          "label": "九龍寨城風格城門",
+          "file": "assets/LANDMARK_07_Kowloon_City_Walled_City_Gate.glb"
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "name": "黃大仙區",
+      "biome": "highland",
+      "theme": "山林高地",
+      "centre": 5,
+      "landmark": 9,
+      "corner": 12,
+      "inner": 21,
+      "outer": 29,
+      "landmarks": [
+        {
+          "label": "獅子山輪廓風格山體",
+          "file": "assets/LANDMARK_08_Wong_Tai_Sin_Lion_Rock.glb"
+        },
+        {
+          "label": "黃大仙祠風格廟宇",
+          "file": "assets/LANDMARK_08_Wong_Tai_Sin_Wong_Tai_Sin_Temple.glb"
+        },
+        {
+          "label": "志蓮淨苑風格木構殿堂",
+          "file": "assets/LANDMARK_08_Wong_Tai_Sin_Chi_Lin_Nunnery.glb"
+        },
+        {
+          "label": "南蓮園池風格金亭",
+          "file": "assets/LANDMARK_08_Wong_Tai_Sin_Nan_Lian_Golden_Pavilion.glb"
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "name": "觀塘區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 6,
+      "landmark": 7,
+      "corner": 13,
+      "inner": 22,
+      "outer": 30,
+      "landmarks": [
+        {
+          "label": "MegaBox風格紅色商場",
+          "file": "assets/LANDMARK_09_Kwun_Tong_MegaBox.glb"
+        },
+        {
+          "label": "裕民坊風格商場",
+          "file": "assets/LANDMARK_09_Kwun_Tong_Yue_Man_Square.glb"
+        },
+        {
+          "label": "觀塘工廈風格建築",
+          "file": "assets/LANDMARK_09_Kwun_Tong_Industrial_Factory.glb"
+        },
+        {
+          "label": "觀塘海濱工業塔風格組件",
+          "file": "assets/LANDMARK_09_Kwun_Tong_Promenade_Tower.glb"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "荃灣區",
+      "biome": "river",
+      "theme": "環河高台",
+      "centre": 6,
+      "landmark": 8,
+      "corner": 10.5,
+      "inner": 23,
+      "outer": 31,
+      "landmarks": [
+        {
+          "label": "如心雙塔風格建築",
+          "file": "assets/LANDMARK_10_Tsuen_Wan_Nina_Twins.glb"
+        },
+        {
+          "label": "荃新天地風格商場",
+          "file": "assets/LANDMARK_10_Tsuen_Wan_Citywalk.glb"
+        },
+        {
+          "label": "南豐紗廠風格工廈",
+          "file": "assets/LANDMARK_10_Tsuen_Wan_The_Mills.glb"
+        },
+        {
+          "label": "三棟屋風格院落",
+          "file": "assets/LANDMARK_10_Tsuen_Wan_Sam_Tung_Uk.glb"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "葵青區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 8,
+      "landmark": 9,
+      "corner": 10,
+      "inner": 24,
+      "outer": 32,
+      "landmarks": [
+        {
+          "label": "青馬大橋風格懸索橋段",
+          "file": "assets/LANDMARK_11_Kwai_Tsing_Tsing_Ma_Bridge.glb"
+        },
+        {
+          "label": "葵青貨櫃碼頭風格起重機",
+          "file": "assets/LANDMARK_11_Kwai_Tsing_Container_Crane.glb"
+        },
+        {
+          "label": "葵青劇院風格建築",
+          "file": "assets/LANDMARK_11_Kwai_Tsing_Kwai_Tsing_Theatre.glb"
+        },
+        {
+          "label": "葵青碼頭風格貨櫃組",
+          "file": "assets/LANDMARK_11_Kwai_Tsing_Container_Stack.glb"
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "屯門區",
+      "biome": "highland",
+      "theme": "山林高地",
+      "centre": 5,
+      "landmark": 7,
+      "corner": 11,
+      "inner": 21,
+      "outer": 29,
+      "landmarks": [
+        {
+          "label": "黃金海岸酒店風格建築",
+          "file": "assets/LANDMARK_12_Tuen_Mun_Gold_Coast_Hotel.glb"
+        },
+        {
+          "label": "T·PARK風格波浪建築",
+          "file": "assets/LANDMARK_12_Tuen_Mun_T_PARK.glb"
+        },
+        {
+          "label": "屯門大會堂風格建築",
+          "file": "assets/LANDMARK_12_Tuen_Mun_Tuen_Mun_Town_Hall.glb"
+        },
+        {
+          "label": "青山禪院風格廟宇",
+          "file": "assets/LANDMARK_12_Tuen_Mun_Tsing_Shan_Monastery.glb"
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "元朗區",
+      "biome": "canyon",
+      "theme": "岩谷斜橋",
+      "centre": 6,
+      "landmark": 8,
+      "corner": 12,
+      "inner": 22,
+      "outer": 30,
+      "landmarks": [
+        {
+          "label": "聚星樓風格古塔",
+          "file": "assets/LANDMARK_13_Yuen_Long_Tsui_Sing_Lau_Pagoda.glb"
+        },
+        {
+          "label": "吉慶圍風格圍村",
+          "file": "assets/LANDMARK_13_Yuen_Long_Kat_Hing_Wai.glb"
+        },
+        {
+          "label": "YOHO風格商場",
+          "file": "assets/LANDMARK_13_Yuen_Long_YOHO_Mall.glb"
+        },
+        {
+          "label": "鄧氏宗祠風格建築",
+          "file": "assets/LANDMARK_13_Yuen_Long_Tang_Ancestral_Hall.glb"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "北區",
+      "biome": "highland",
+      "theme": "山林高地",
+      "centre": 7,
+      "landmark": 9,
+      "corner": 13,
+      "inner": 23,
+      "outer": 31,
+      "landmarks": [
+        {
+          "label": "蓬瀛仙館風格建築",
+          "file": "assets/LANDMARK_14_North_Fung_Ying_Seen_Koon.glb"
+        },
+        {
+          "label": "龍躍頭風格圍村門樓",
+          "file": "assets/LANDMARK_14_North_Lung_Yeuk_Tau_Gate.glb"
+        },
+        {
+          "label": "荔枝窩風格客家村屋",
+          "file": "assets/LANDMARK_14_North_Lai_Chi_Wo.glb"
+        },
+        {
+          "label": "上水舊墟風格唐樓",
+          "file": "assets/LANDMARK_14_North_Sheung_Shui_Shophouse.glb"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "大埔區",
+      "biome": "river",
+      "theme": "環河高台",
+      "centre": 8,
+      "landmark": 7,
+      "corner": 9,
+      "inner": 24,
+      "outer": 32,
+      "landmarks": [
+        {
+          "label": "鐵路博物館風格舊車站",
+          "file": "assets/LANDMARK_15_Tai_Po_Railway_Museum.glb"
+        },
+        {
+          "label": "海濱公園風格回歸塔",
+          "file": "assets/LANDMARK_15_Tai_Po_Waterfront_Lookout.glb"
+        },
+        {
+          "label": "大埔藝術中心風格舊校舍",
+          "file": "assets/LANDMARK_15_Tai_Po_Tai_Po_Arts_Centre.glb"
+        },
+        {
+          "label": "大埔文武廟風格廟宇",
+          "file": "assets/LANDMARK_15_Tai_Po_Tai_Po_Man_Mo.glb"
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "name": "沙田區",
+      "biome": "river",
+      "theme": "環河高台",
+      "centre": 5,
+      "landmark": 8,
+      "corner": 10,
+      "inner": 21,
+      "outer": 29,
+      "landmarks": [
+        {
+          "label": "香港文化博物館風格建築",
+          "file": "assets/LANDMARK_16_Sha_Tin_Heritage_Museum.glb"
+        },
+        {
+          "label": "新城市廣場風格商場",
+          "file": "assets/LANDMARK_16_Sha_Tin_New_Town_Plaza.glb"
+        },
+        {
+          "label": "科學園金蛋風格建築",
+          "file": "assets/LANDMARK_16_Sha_Tin_Science_Park_Egg.glb"
+        },
+        {
+          "label": "車公廟風格廟宇",
+          "file": "assets/LANDMARK_16_Sha_Tin_Che_Kung_Temple.glb"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "西貢區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 6,
+      "landmark": 9,
+      "corner": 11,
+      "inner": 22,
+      "outer": 30,
+      "landmarks": [
+        {
+          "label": "香港單車館風格建築",
+          "file": "assets/LANDMARK_17_Sai_Kung_Velodrome.glb"
+        },
+        {
+          "label": "萬宜水庫風格六角岩柱",
+          "file": "assets/LANDMARK_17_Sai_Kung_High_Island_Columns.glb"
+        },
+        {
+          "label": "鹽田梓風格小教堂",
+          "file": "assets/LANDMARK_17_Sai_Kung_Yim_Tin_Tsai_Chapel.glb"
+        },
+        {
+          "label": "西貢風格碼頭",
+          "file": "assets/LANDMARK_17_Sai_Kung_Sai_Kung_Pier.glb"
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "離島區",
+      "biome": "coast",
+      "theme": "海岸斷崖",
+      "centre": 7,
+      "landmark": 7,
+      "corner": 12,
+      "inner": 23,
+      "outer": 31,
+      "landmarks": [
+        {
+          "label": "昂坪風格牌坊",
+          "file": "assets/LANDMARK_18_Islands_Ngong_Ping_Gateway.glb"
+        },
+        {
+          "label": "南丫島風格風車",
+          "file": "assets/LANDMARK_18_Islands_Lamma_Wind_Turbine.glb"
+        },
+        {
+          "label": "東涌炮台風格圍牆",
+          "file": "assets/LANDMARK_18_Islands_Tung_Chung_Fort.glb"
+        },
+        {
+          "label": "大澳風格棚屋",
+          "file": "assets/LANDMARK_18_Islands_Tai_O_Stilt_House.glb"
+        }
+      ]
+    }
+  ],
+  "special_vehicles": {
+    "models": [
+      "mech",
+      "helicopter",
+      "mega"
+    ],
+    "schedule": "first 12–20 seconds then 45–65 seconds, shuffled pair deck",
+    "verified": [
+      "random deck includes both types",
+      "airborne box cannot open",
+      "mech driving, firing and exit",
+      "helicopter takeoff and water crossing",
+      "altitude toggle, landing lock and safe exit",
+      "air-to-ground fire damages target"
+    ],
+    "not_verified": "Full WebGL aircraft appearance, real-device flying and mobile multi-touch"
+  },
+  "map_validation": {
+    "checks": 24,
+    "maps": [
+      {
+        "id": "01",
+        "name": "中西區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 45
+      },
+      {
+        "id": "02",
+        "name": "灣仔區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 48
+      },
+      {
+        "id": "03",
+        "name": "東區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 46
+      },
+      {
+        "id": "04",
+        "name": "南區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 48
+      },
+      {
+        "id": "05",
+        "name": "油尖旺區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 44
+      },
+      {
+        "id": "06",
+        "name": "深水埗區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 52
+      },
+      {
+        "id": "07",
+        "name": "九龍城區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 45
+      },
+      {
+        "id": "08",
+        "name": "黃大仙區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 42
+      },
+      {
+        "id": "09",
+        "name": "觀塘區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 50
+      },
+      {
+        "id": "10",
+        "name": "荃灣區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 53
+      },
+      {
+        "id": "11",
+        "name": "葵青區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 44
+      },
+      {
+        "id": "12",
+        "name": "屯門區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 46
+      },
+      {
+        "id": "13",
+        "name": "元朗區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 44
+      },
+      {
+        "id": "14",
+        "name": "北區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 45
+      },
+      {
+        "id": "15",
+        "name": "大埔區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 46
+      },
+      {
+        "id": "16",
+        "name": "沙田區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 47
+      },
+      {
+        "id": "17",
+        "name": "西貢區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 44
+      },
+      {
+        "id": "18",
+        "name": "離島區",
+        "geometry": "passed",
+        "logistics": "passed",
+        "primitives": 44
+      }
+    ],
+    "uniqueTerrainProfiles": 18
+  },
+  "online_integration_checks": 22,
+  "online_protocol": "30Hz authoritative Node.js simulation; 15Hz HTTP polling; four teams",
+  "browser_online": "Two browser tabs created/joined/started shared match",
+  "mobile_layout": "390x844 browser layout passed; not physical-device test",
+  "public_multiplayer_deployment": "not deployed; Node.js server included",
+  "real_mobile_hardware": "not verified",
+  "full_WebGL": "not verified in current browser"
+}
