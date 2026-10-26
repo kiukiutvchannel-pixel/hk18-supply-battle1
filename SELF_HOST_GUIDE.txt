@@ -1,0 +1,18 @@
+香港十八區補給戰：毋須寄存帳戶的網上連機
+
+1. 在 GitHub 按 Code -> Download ZIP，完整解壓。
+2. Windows 電腦需安裝 Node.js 20 或以上。
+3. 雙擊 START_FREE_ONLINE.bat。首次會從 Cloudflare 官方 GitHub 下載 cloudflared。
+4. 畫面出現 SHARE THIS URL 後，網址亦會儲存在 JOIN_LINK.txt。
+5. 手機開該 HTTPS 網址，房主開房；朋友使用相同網址及房號加入。
+
+電腦、遊戲程式及連線視窗必須保持運行。關閉後網址失效；重新啟動會得到新網址。
+使用 Cloudflare Quick Tunnel，毋須 Cloudflare 或 Railway 帳戶，毋須路由器轉發連接埠。
+這是臨時測試連線，非永久雲端寄存；Cloudflare 不保證穩定性，最多 200 個同時處理中的 HTTP 請求。
+本遊戲使用 HTTP 輪詢，不依賴 SSE。能否從你的所在地及朋友網絡連線，仍要實測。
+任何知道網址的人可以開啟遊戲。請只分享給參與測試的人。
+
+若顯示 port 3000 被佔用，先關閉之前開啟的遊戲伺服器視窗再試。
+若下載失敗，確認可連接 GitHub，刪除 tools 裡下載不完整的 cloudflared 再重試。
+若沒有產生網址，保留視窗最後錯誤訊息供排查。
+Windows 實機及你的網絡尚未驗證。
